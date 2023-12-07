@@ -19,7 +19,12 @@ const providerSchema = new Schema({
         required: true,
         minlength: 8
     },
-    
+    patients: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Patient'
+        }
+    ]
 });
 
 // if password is new or modified, hash it
