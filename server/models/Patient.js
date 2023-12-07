@@ -18,7 +18,13 @@ const patientSchema = new Schema({
         type: String,
         required: true,
         minlength: 8
-    }
+    },
+    chartNotes: [
+        {
+            type: Schema.Types.ObjectId,
+            red: 'ChartNote'
+        }
+    ]
 });
 
 patientSchema.pre('save', async function(next) {
