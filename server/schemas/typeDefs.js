@@ -42,9 +42,9 @@ getChartNote(noteId: ID!): ChartNote
 type Mutation {
 addProvider(username: String!, email: String!, password: String!): providerAuth
 addPatient(username: String!, email: String!, password: String!): patientAuth
-loginProvider(username: String!, password: String!): providerAuth
-loginPatient(username: String!, password: String!): patientAuth
-createChartNote(patientId: ID!): ChartNote 
+loginProvider(email: String!, password: String!): providerAuth
+loginPatient(email: String!, password: String!): patientAuth
+addChartNote(patientId: ID!, noteText: String!): ChartNote 
 removePatient(patientId: ID!): Patient
 removeChartNote(patientId: ID!, noteId: ID!) ChartNote 
 }
