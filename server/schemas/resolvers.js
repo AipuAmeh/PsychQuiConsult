@@ -47,27 +47,35 @@ const resolvers = {
       return { token, provider };
     },
     loginPatient: async (parent, { email, password }) => {
-        const patient = await Patient.findOne({ email });
+      const patient = await Patient.findOne({ email });
 
-        if (!patient) {
-          throw AuthenticationError;
-        }
-  
-        const correctPw = provider.isCorrectPassword(password);
-  
-        if (!correctPw) {
-          throw AuthenticationError;
-        }
-  
-        const token = signToken(patient);
-        return { token, patient };
+      if (!patient) {
+        throw AuthenticationError;
+      }
+
+      const correctPw = provider.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw AuthenticationError;
+      }
+
+      const token = signToken(patient);
+      return { token, patient };
     },
-    addChartNote: async (parent, { patientId, noteText }) => {
-        const chartNote = await ChartNote.create({ noteText });
-
-        // should chart note belong to provider?
-            // provider has chart notes and patients
-    }
+    addChartNote: async (parent, { provider, noteText }) => {
+      const chartNote = await ChartNote.create({ noteText });
+      await Provider.findOneAndUpdate(
+        { username: provider },
+        { addToSet: { chartNotes: chartNote._id } }
+      );
+      return chartNote;
+    },
+    removePatient: async (parent, { patientId }) => {
+      return Patient.findOneAndDelete({ _id: patientId });
+    },
+    removeChartNote: async (parent, { noteId }) => {
+      return ChartNote.findOneAndDelete({ _id: noteId });
+    },
   },
 };
 
