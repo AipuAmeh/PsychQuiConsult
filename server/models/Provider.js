@@ -24,6 +24,12 @@ const providerSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Patient'
         }
+    ],
+    chartNotes: [
+        {
+            type: Schema.Types.ObjectId,
+            red: 'ChartNote'
+        }
     ]
 });
 

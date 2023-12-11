@@ -1,7 +1,12 @@
 const { Schema, model } = require('mongoose');
 
 const chartNoteSchema = new Schema({
-    chartNoteText: {
+    provider: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    noteText: {
         type: String,
         minlength: 1,
         maxlength: 300,
