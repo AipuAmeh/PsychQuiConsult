@@ -22,7 +22,7 @@ const patientSchema = new Schema({
     chartNotes: [
         {
             type: Schema.Types.ObjectId,
-            red: 'ChartNote'
+            ref: 'ChartNote'
         }
     ]
 });
