@@ -13,12 +13,12 @@ const chartNoteSchema = new Schema({
         trim: true,
     },
     dateCreated: {
-        type: date,
+        type: Date,
         default: Date.now,
         // date formatting 
     }
 });
 
-const ChartNote = chartNoteSchema.model('ChartNote', chartNoteSchema);
+const ChartNote = model('ChartNote', chartNoteSchema);
 
 module.exports = ChartNote;

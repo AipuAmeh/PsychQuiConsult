@@ -46,7 +46,7 @@ loginProvider(email: String!, password: String!): providerAuth
 loginPatient(email: String!, password: String!): patientAuth
 addChartNote(provider: String!, noteText: String!): ChartNote 
 removePatient(patientId: ID!): Patient
-removeChartNote(noteId: ID!) ChartNote 
+removeChartNote(noteId: ID!): ChartNote 
 }
 `;
 

@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const bcrypt = require('bycrypt');
+const bcrypt = require('bcrypt');
 
 const providerSchema = new Schema({
     username: {
@@ -28,7 +28,7 @@ const providerSchema = new Schema({
     chartNotes: [
         {
             type: Schema.Types.ObjectId,
-            red: 'ChartNote'
+            ref: 'ChartNote'
         }
     ]
 });
