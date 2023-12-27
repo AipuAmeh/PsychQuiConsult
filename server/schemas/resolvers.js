@@ -27,7 +27,7 @@ const resolvers = {
     },
     addPatient: async (parent, { username, email, password }) => {
       const patient = await Patient.create({ username, email, password });
-      const token = signToken(provider);
+      const token = signToken(patient);
       return { token, patient };
     },
     loginProvider: async (parent, { email, password }) => {
@@ -44,6 +44,8 @@ const resolvers = {
       }
 
       const token = signToken(provider);
+
+      console.log({ token, provider });
       return { token, provider };
     },
     loginPatient: async (parent, { email, password }) => {
@@ -53,20 +55,22 @@ const resolvers = {
         throw AuthenticationError;
       }
 
-      const correctPw = provider.isCorrectPassword(password);
+      const correctPw = patient.isCorrectPassword(password);
 
       if (!correctPw) {
         throw AuthenticationError;
       }
 
       const token = signToken(patient);
+      console.log({ token, patient });
       return { token, patient };
     },
-    addChartNote: async (parent, { provider, noteText }) => {
-      const chartNote = await ChartNote.create({ noteText });
-      await Provider.findOneAndUpdate(
-        { username: provider },
-        { addToSet: { chartNotes: chartNote._id } }
+    addChartNote: async (parent, { patient, noteText }) => {
+      const chartNote = await ChartNote.create({ patient, noteText });
+
+      await Patient.findOneAndUpdate(
+        { username: patient },
+        { $addToSet: { chartNotes: chartNote._id } }
       );
       return chartNote;
     },
