@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const chartNoteSchema = new Schema({
-    provider: {
+    patient: {
         type: String,
         required: true,
         trim: true
@@ -16,7 +16,8 @@ const chartNoteSchema = new Schema({
         type: Date,
         default: Date.now,
         // date formatting 
-    }
+    },
+
 });
 
 const ChartNote = model('ChartNote', chartNoteSchema);
