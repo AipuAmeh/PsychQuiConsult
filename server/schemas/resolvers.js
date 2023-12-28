@@ -70,7 +70,8 @@ const resolvers = {
 
       await Patient.findOneAndUpdate(
         { username: patient },
-        { $addToSet: { chartNotes: chartNote._id } }
+        { $addToSet: { chartNotes: chartNote._id } },
+        { new: true }
       );
       return chartNote;
     },
