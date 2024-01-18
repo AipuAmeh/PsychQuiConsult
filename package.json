@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/AipuAmeh/PsychQuiConsult#readme",
   "dependencies": {
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "jwt-decode": "^4.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.17",
