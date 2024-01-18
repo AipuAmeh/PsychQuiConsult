@@ -1,9 +1,9 @@
-import decode from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode';
 
 // methods associated with the class titled AuthService 
 class AuthService {
     getProfile() {
-        return decode(this.getToken());
+        return jwtDecode(this.getToken());
     }
 
     loggedIn() {
@@ -13,7 +13,7 @@ class AuthService {
     }
 
     isTokenExpired(token) {
-        const decoded = decode(token);
+        const decoded = jwtDecode(token);
 
         if (decoded.exp < Date.now() / 1000) {
             localStorage.removeItem('id_token');
@@ -36,6 +36,6 @@ class AuthService {
         localStorage.removeItem('id_token');
         window.location.reload();
     }
-};
+}
 
 export default new AuthService();
