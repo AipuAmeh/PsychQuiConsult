@@ -6,7 +6,7 @@ export default function ErrorPage() {
   console.error(error);
 
   return (
-    <div id="error-page">
+    <div id="error-page" className="text-3xl font-bold underline">
       <h1>Oops! This page does not exist.</h1>
       <p>
         <i>{error.statusText || error.message}</i>
