@@ -52,7 +52,7 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "payments",
+        path: "/payments",
         element: <Payment />
       }
     ],
