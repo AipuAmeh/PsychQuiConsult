@@ -14,13 +14,18 @@ const Header = () => {
   };
 
   return (
-    <header style={styles.accentColor} className="flex justify-end py-4">
+    <header style={styles.accentColor} className="flex py-4">
       <div>
-        <Link to="/">
+        <img
+        src='images/logo.png'
+        className="logo flex justify-start"
+        alt="psychquiconsult-logo"
+        ></img>
+      </div>
+      <div className="flex flex-row justify-items-end">
+      <Link to="/">
           <h3 className="px-2">Home </h3>
         </Link>
-      </div>
-      <div>
         <Link to="/">
           <h3 className="px-2">About </h3>
         </Link>
@@ -35,16 +40,16 @@ const Header = () => {
           </>
         ) : (
           <div className="flex flex-row">
-            <div>
+          
               <Link to="/">
                 <h3 className="px-2">Login </h3>
               </Link>
-            </div>
-            <div>
+          
+           
               <Link to="/">
                 <h3 className="px-3">Signup </h3>
               </Link>
-            </div>
+           
           </div>
         )}
       </div>
