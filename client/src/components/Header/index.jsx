@@ -14,23 +14,23 @@ const Header = () => {
   };
 
   return (
-    <header style={styles.accentColor} className="flex py-4">
-      <div>
-        <img
+    <header style={styles.accentColor} className="mb-4 py-2 flex-row align-center">
+          <img
         src='images/logo.png'
-        className="logo flex justify-start"
+        className="logo flex place-items-center justify-start mt-8"
         alt="psychquiconsult-logo"
         ></img>
-      </div>
-      <div className="flex flex-row justify-items-end">
+      <div className="container flex flex-row justify-end ml-12">
+    
+   
+      <nav className="flex">
       <Link to="/">
           <h3 className="px-2">Home </h3>
         </Link>
         <Link to="/">
           <h3 className="px-2">About </h3>
         </Link>
-      </div>
-      <div>
+      </nav>
         {Auth.loggedIn() ? (
           <>
             <span>Hey there, {Auth.getProfile().data.username}!</span>
@@ -39,7 +39,7 @@ const Header = () => {
             </button>
           </>
         ) : (
-          <div className="flex flex-row">
+          <nav className="flex ">
           
               <Link to="/">
                 <h3 className="px-2">Login </h3>
@@ -50,7 +50,7 @@ const Header = () => {
                 <h3 className="px-3">Signup </h3>
               </Link>
            
-          </div>
+          </nav>
         )}
       </div>
     </header>
