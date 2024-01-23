@@ -9,14 +9,16 @@ import { setContext } from "@apollo/client/link/context";
 import { Outlet } from "react-router-dom";
 import "./App.css";
 
-import Header from './components/Header';
+
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
-const token = localStorage.getItem("id_token");
+  const token = localStorage.getItem("id_token");
 
   return {
     headers: {
@@ -32,13 +34,14 @@ const client = new ApolloClient({
 });
 
 function App() {
-
   return (
     <>
       <ApolloProvider client={client}>
-    <Header />
-    <div className="container"></div>
-    <Outlet />
+        <Header />
+        <main>
+          <Outlet />
+        </main>
+        <Footer />
       </ApolloProvider>
     </>
   );
