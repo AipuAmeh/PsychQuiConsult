@@ -39,7 +39,8 @@ const Footer = () => {
    <button className="bg-transparent border-solid text-black-700 font-semibold py-2 px-4 hover:border-transparent rounded contact-button" style={styles.button}>
 Contact Us!
 </button>
-<p >Copyright @ PsychQuiConsult LLC. 2024</p>
+
+<span className="ml-3">Copyright @ PsychQuiConsult LLC. 2024</span>
     </footer>
   );
 };
