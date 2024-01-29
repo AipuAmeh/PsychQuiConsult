@@ -45,3 +45,8 @@
 .contact-button:hover {
   color: #FFEED3;
 }
+
+li::marker {
+  color: #C49A6C;
+  font-size: 2.5rem;
+}
