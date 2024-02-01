@@ -8,9 +8,9 @@ import App from "./App.jsx";
 // import Contact from "./pages/Contact.jsx";
 // import Dashboard from "./pages/Dashboard.jsx";
 import Homepage from "./pages/Homepage.jsx";
-// import Login from "./pages/Login.jsx";
+import Login from "./pages/Login.jsx";
 // import Payment from "./pages/Payment.jsx";
-// import Signup from "./pages/Signup.jsx";
+import Signup from "./pages/Signup.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 
 const router = createBrowserRouter([
@@ -31,14 +31,14 @@ const router = createBrowserRouter([
       //   path: "/contact",
       //   element: <Contact />,
       // },
-      // {
-      //   path: "/login",
-      //   element: <Login />,
-      // },
-      // {
-      //   path: "/signup",
-      //   element: <Signup />,
-      // },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
+      },
       // {
       //   path: "/dashboard",
       //   element: <Dashboard />,

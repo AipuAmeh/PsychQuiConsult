@@ -38,11 +38,11 @@ const Header = () => {
           </>
         ) : (
           <nav className=" pb-3 flex items-center">
-            <Link to="/">
+            <Link to="/login">
               <h3 className="px-2">Login </h3>
             </Link>
 
-            <Link to="/">
+            <Link to="/signup">
               <h3 className="px-3">Signup </h3>
             </Link>
           </nav>

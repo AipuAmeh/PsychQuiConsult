@@ -40,7 +40,7 @@ const Footer = () => {
 Contact Us!
 </button>
 
-<span className="ml-3">Copyright @ PsychQuiConsult LLC. 2024</span>
+<span className="ml-3">&copy;2024 PsychQuiConsult LLC. </span>
     </footer>
   );
 };
