@@ -1,10 +1,10 @@
-import LoginForm from "../components/Form"
+import SignupForm from "../components/Forms/SignupForm";
 
 export default function Signup() {
-    return (
-        <div>
-        <h1>THIS IS MY SIGN-UP PAGE</h1>
+  return (
+    <div className="signup-page h-screen">
+        <h1 className="flex justify-center py-10 text-2xl ">Sign up</h1>
+     <SignupForm />
     </div>
-    )
-
-};
+  );
+}
