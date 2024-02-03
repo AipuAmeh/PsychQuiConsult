@@ -37,7 +37,7 @@ patientSchema.pre('save', async function(next) {
 });
 
 patientSchema.methods.isCorrectPassword = async function(password) {
-    bcrypt.compare(password, this.password)
+  return bcrypt.compare(password, this.password)
 };
 
 const Patient = model('Patient', patientSchema);

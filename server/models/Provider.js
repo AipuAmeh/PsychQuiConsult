@@ -45,7 +45,7 @@ providerSchema.pre('save', async function(next) {
 
 // if password is correct, compare it with password already on file
 providerSchema.methods.isCorrectPassword = async function(password) {
-    bcrypt.compare(password, this.password)
+   return bcrypt.compare(password, this.password)
 };
 
 const Provider = model('Provider', providerSchema);
