@@ -6,56 +6,66 @@ export const ADD_PROVIDER = gql`
     $email: String!
     $password: String!
   ) {
-    token
-    currentProvider {
-      _id
-      username
+    addProvider(username: $username, email: $email, password: $password) {
+      token
+      currentProvider {
+        _id
+        username
+      }
     }
   }
 `;
 
 export const ADD_PATIENT = gql`
   mutation addPatient($username: String!, $email: String!, $password: String!) {
-    token
-    currentPatient {
-      _id
-      username
+    addPatient(username: $username, email: $email, password: $password) {
+      token
+      currentPatient {
+        _id
+        username
+      }
     }
   }
 `;
 
 export const LOGIN_PROVIDER = gql`
   mutation loginProvider($email: String!, $password: String!) {
-    token
-    currentProvider {
-      _id
-      username
+    loginProvider(email: $email, password: $password) {
+      token
+      currentProvider {
+        _id
+        username
+      }
     }
   }
 `;
 
 export const LOGIN_PATIENT = gql`
   mutation loginPatient($email: String!, $password: String!) {
-    token
-    currentPatient {
-      _id
-      username
+    loginPatient(email: $email, password: $password) {
+      token
+      currentPatient {
+        _id
+        username
+      }
     }
   }
 `;
 
 export const ADD_CHARTNOTE = gql`
   mutation addChartNote($patient: String!, $noteText: String!) {
-    _id
-    patient
-    noteText
-    dateCreated
+    addChartNote(patient: $patient, noteText: $noteText) {
+      _id
+      patient
+      noteText
+      dateCreated
+    }
   }
 `;
 
 export const REMOVE_PATIENT = gql`
   mutation removePatient($patientId: ID!) {
-    removePatient {
+    removePatient(patientId: $patientId) {
       _id
       username
       email
@@ -72,7 +82,7 @@ export const REMOVE_PATIENT = gql`
 
 export const REMOVE_CHARTNOTE = gql`
   mutation removeChartNote($noteId: ID!) {
-    removeChartNote {
+    removeChartNote(noteId: $noteId) {
       _id
       patient
       noteText
