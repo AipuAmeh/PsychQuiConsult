@@ -61,7 +61,7 @@ const SignupForm = () => {
         >
           <div className="mb-4">
             <label
-              className="block text-black-700 text-sm font-bold mb-2"
+              className="block text-black-700 text-sm font-bold mb-2 font-serif"
               htmlFor="username"
             >
               Username
@@ -78,7 +78,7 @@ const SignupForm = () => {
           </div>
           <div className="mb-6">
             <label
-              className="block text-black-700 text-sm font-bold mb-2"
+              className="block text-black-700 text-sm font-bold mb-2 font-serif"
               htmlFor="email"
             >
               Email
@@ -93,13 +93,13 @@ const SignupForm = () => {
               onChange={handleChange}
             ></input>
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-black-900 text-sm font-bold mb-2 font-serif"
               htmlFor="password"
             >
               Password
             </label>
             <input
-              className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none rounded w-full py-2 px-3 text-black-900 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="signup-password"
               name="password"
               type="password"
@@ -110,7 +110,7 @@ const SignupForm = () => {
           </div>
           <div className="flex items-center justify-between flex-col space-y-4">
             <button
-              className=" mx-auto text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className=" mx-auto text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-serif"
               type="submit"
               style={styles.button}
             >
