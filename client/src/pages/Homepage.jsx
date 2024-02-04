@@ -35,7 +35,7 @@ const Home = () => {
           PSYCHQUICONSULT
         </h1>
       </div>
-      <span className="flex justify-center text-xl py-4">
+      <span className="flex justify-center text-xl py-4 font-serif">
         Bridging the Gap In Psychatric Managment Through Consultation and
         Integration
       </span>
@@ -43,29 +43,31 @@ const Home = () => {
         style={styles.loginSection}
         className="login-section flex justify-center grid py-20"
       >
-        <h2 className="flex align-center text-2xl p-4">
+        <h2 className="flex align-center text-2xl p-4 font-serif">
           New Here? Login or Sign up
         </h2>
         <div className="button-styles flex flex-row p-6 justify-between">
           <button
             style={styles.button}
-            className="text-lg font-semibold py-2 px-6 rounded"
+            className=" font-serif text-lg font-semibold py-2 px-6 rounded"
           >
             <Link to="/login">Login</Link>
           </button>
           <button
             style={styles.button}
-            className="text-lg font-semibold py-2 px-6 rounded"
+            className="text-lg font-semibold py-2 px-6 rounded font-serif"
           >
             <Link to="/signup">Sign up</Link>
           </button>
         </div>
       </div>
       <section className="py-20">
-        <h1 className="flex justify-center text-2xl mb-3">Why We Care</h1>
+        <h1 className="flex justify-center text-2xl mb-3 font-serif">
+          Why We Care
+        </h1>
         <div className="flex flex-col px-4">
           <ol
-            className="flex flex-col align-baseline list-decimal leading-10 mx-auto text-xl"
+            className="flex flex-col align-baseline list-decimal leading-10 mx-auto text-xl font-serif"
             style={styles.listStyles}
           >
             <li className="fact">

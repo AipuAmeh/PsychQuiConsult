@@ -37,7 +37,7 @@ const providerSchema = new Schema({
 providerSchema.pre('save', async function(next) {
     if (this.isNew || this.isModified('password')) {
         const saltRounds = 10;
-        this.password = bcrypt.hash(this.password, saltRounds)
+        this.password = await bcrypt.hash(this.password, saltRounds)
     };
 
     next();
@@ -45,7 +45,7 @@ providerSchema.pre('save', async function(next) {
 
 // if password is correct, compare it with password already on file
 providerSchema.methods.isCorrectPassword = async function(password) {
-    bcrypt.compare(password, this.password)
+   return bcrypt.compare(password, this.password)
 };
 
 const Provider = model('Provider', providerSchema);
