@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useMutation } from "@apollo/client";
-import { LOGIN_PATIENT } from "../../utils/mutations";
+import { LOGIN_PATIENT, LOGIN_PROVIDER } from "../../utils/mutations";
 
 import Auth from "../../utils/auth";
 
@@ -16,31 +16,35 @@ const styles = {
 };
 
 const LoginForm = () => {
-  const [patientFormState, setPatientFormState] = useState({
+  const [formState, setFormState] = useState({
     email: "",
     password: "",
   });
 
   const [loginPatient, { error, data }] = useMutation(LOGIN_PATIENT);
+  // const [loginProvider, { error, data}] = useMutation(LOGIN_PROVIDER);
+
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setPatientFormState({
-      ...patientFormState,
+    setFormState({
+      ...formState,
       [name]: value,
     });
   };
 
   const handlePatientLogin = async (e) => {
     e.preventDefault();
-    console.log(patientFormState);
+    console.log(formState);
     try {
       const { data } = await loginPatient({
-        variables: { ...patientFormState },
+        variables: { ...formState },
       });
       Auth.login(data.loginPatient.token);
-      setPatientFormState({
+      setFormState({
         email: "",
         password: "",
       });
@@ -74,7 +78,7 @@ const LoginForm = () => {
               type="text"
               placeholder="Email"
               name="email"
-              value={patientFormState.email}
+              value={formState.email}
               onChange={handleChange}
             ></input>
           </div>
@@ -103,7 +107,7 @@ const LoginForm = () => {
               type="password"
               placeholder="******************"
               name="password"
-              value={patientFormState.password}
+              value={formState.password}
               onChange={handleChange}
             ></input>
           </div>
