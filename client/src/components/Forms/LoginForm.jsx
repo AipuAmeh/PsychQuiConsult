@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useMutation } from "@apollo/client";
 import { LOGIN_PATIENT, LOGIN_PROVIDER } from "../../utils/mutations";
@@ -16,16 +16,14 @@ const styles = {
 };
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const [formState, setFormState] = useState({
     email: "",
     password: "",
   });
 
-  const [loginPatient, { error, data }] = useMutation(LOGIN_PATIENT);
-  // const [loginProvider, { error, data}] = useMutation(LOGIN_PROVIDER);
-
-
-
+  const [loginPatient, { error: patientError , data: patientData }] = useMutation(LOGIN_PATIENT);
+  const [loginProvider, { error: providerError, data: providerData }] = useMutation(LOGIN_PROVIDER);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,16 +36,65 @@ const LoginForm = () => {
 
   const handlePatientLogin = async (e) => {
     e.preventDefault();
-    console.log(formState);
+    const login =
+      e.nativeEvent.submitter.id == "provider-login"
+        ? loginProvider
+        : loginPatient;
+
+        // console.log('WHO', login);
     try {
-      const { data } = await loginPatient({
-        variables: { ...formState },
+      const mutationResponse = await login({
+        variables: {
+          email: formState.email,
+          password: formState.password,
+        },
       });
-      Auth.login(data.loginPatient.token);
-      setFormState({
-        email: "",
-        password: "",
-      });
+     console.log('RESPONSE', mutationResponse);
+      // if (e.nativeEvent.submitter.id == "provider-login") {
+      //   try {
+      //     const { providerData } = await loginProvider({
+      //       variables: { ...mutationResponse },
+      //     });
+      //     Auth.login(providerData.loginProvider.token);
+      //     setFormState({
+      //       email: "",
+      //       password: ""
+      //     })
+      //     navigate('/');
+      //   } catch (error) {
+      //     console.error(error)
+      //   }
+       
+      // } else {
+      //   console.log('UNABLE TO LOG PROVIDER');
+      // }
+    // else {
+    //     Auth.login(mutationResponse.loginPatient.token);
+    //     setFormState(mutationResponse);
+    //   }
+      
+    //   // let mutationObj =
+    //   //   mutationResponse.data[Object.keys(mutationResponse.data)[0]];
+
+    //   // const { token } = mutationObj;
+    //   // const user =
+    //   //   mutationObj[
+    //   //     Object.keys(mutationObj)[Object.keys(mutationObj).findIndex((el) => el.includes("current"))]
+    //   //   ];
+    // } catch (error) {
+    //   console.error(error)
+    // }
+    // e.preventDefault();
+    // console.log(formState);
+    // try {
+    //   const { data } = await loginPatient({
+    //     variables: { ...formState },
+    //   });
+    //   Auth.login(data.loginPatient.token);
+    //   setFormState({
+    //     email: "",
+    //     password: "",
+    //   });
     } catch (error) {
       console.error(error);
     }
@@ -55,9 +102,9 @@ const LoginForm = () => {
 
   return (
     <div className="w-full max-w-lg mx-auto">
-      {data ? (
+      {patientData || providerData ? (
         <p>
-          Success! <Link to="/"> back to homepage.</Link>
+          Success! <Link to='/'> back to homepage. </Link>
         </p>
       ) : (
         <form
@@ -103,7 +150,7 @@ const LoginForm = () => {
             </label>
             <input
               className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
+              id="new-password"
               type="password"
               placeholder="******************"
               name="password"
@@ -114,6 +161,7 @@ const LoginForm = () => {
           <div className="flex items-center justify-between flex-col space-y-4">
             <button
               className="mx-auto text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-serif"
+              id="provider-login"
               style={styles.buttons}
               type="submit"
             >
@@ -121,6 +169,7 @@ const LoginForm = () => {
             </button>
             <button
               className=" mx-auto text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-serif"
+              id="patient-login"
               style={styles.buttons}
               type="submit"
             >
@@ -129,9 +178,9 @@ const LoginForm = () => {
           </div>
         </form>
       )}
-      {error && (
-        <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
-      )}
+      {patientError || providerError ? (
+        <div className="my-3 p-3 bg-danger text-white"></div>
+      ) : null}
     </div>
   );
 };

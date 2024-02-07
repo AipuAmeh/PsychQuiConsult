@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import About from "./pages/About.jsx";
 // import Contact from "./pages/Contact.jsx";
-// import Dashboard from "./pages/Dashboard.jsx";
+import ProviderDashboard from "../provider-pages/Dashboard.jsx";
 import Homepage from "./pages/Homepage.jsx";
 import Login from "./pages/Login.jsx";
 // import Payment from "./pages/Payment.jsx";
@@ -39,10 +39,10 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <Signup />,
       },
-      // {
-      //   path: "/dashboard",
-      //   element: <Dashboard />,
-      // },
+      {
+        path: "/admin",
+        element: <ProviderDashboard />,
+      },
       // {
       //   path: "/dashboard/:providerId",
       //   element: <Dashboard />,

@@ -31,6 +31,7 @@ const SignupForm = () => {
     });
   };
 
+  // add signup as provider function
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     console.log(formState);

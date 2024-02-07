@@ -45,7 +45,7 @@ const resolvers = {
 
       const token = signToken(provider);
 
-      console.log({ token, provider });
+      // console.log({ token, provider });
       return { token, provider };
     },
     loginPatient: async (parent, { email, password }) => {
