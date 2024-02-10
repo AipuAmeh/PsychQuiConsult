@@ -7,7 +7,7 @@ const resolvers = {
       return Provider.findOne({ email }).populate("patients");
     },
     currentPatient: async (parent, { email }) => {
-      return Patient.findOne(parent, { email }).populate("chartNotes");
+      return Patient.findOne({ email: email }).populate("chartNotes");
     },
     getAllPatients: async () => {
       return Patient.find().populate("chartNotes");
@@ -37,7 +37,7 @@ const resolvers = {
         throw AuthenticationError;
       }
 
-      const correctPw = provider.isCorrectPassword(password);
+      const correctPw = await provider.isCorrectPassword(password);
 
       if (!correctPw) {
         throw AuthenticationError;
@@ -50,12 +50,12 @@ const resolvers = {
     },
     loginPatient: async (parent, { email, password }) => {
       const patient = await Patient.findOne({ email });
-
+      console.log('THIS IS MY PATIENT', patient);
       if (!patient) {
         throw AuthenticationError;
       }
 
-      const correctPw = patient.isCorrectPassword(password);
+      const correctPw = await patient.isCorrectPassword(password);
 
       if (!correctPw) {
         throw AuthenticationError;

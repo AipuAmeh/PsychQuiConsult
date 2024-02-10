@@ -22,12 +22,12 @@ dateCreated: String
 }
 
 type providerAuth {
-token: ID
+token: ID!
 currentProvider: Provider
 }
 
 type patientAuth {
-token: ID
+token: ID!
 currentPatient: Patient
 }
 

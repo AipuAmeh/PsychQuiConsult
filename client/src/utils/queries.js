@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const QUERY_PROVIDER = gql`
-  query currentProvider {
-    provider {
+  query currentProvider($email: String!) {
+    currentProvider(email: $email) {
       _id
       username
       email
@@ -12,9 +12,9 @@ export const QUERY_PROVIDER = gql`
   }
 `;
 
-export const QUERY_PATIENT = gql`
-  query currentPatient {
-    patient {
+export const QUERY_CURRENT_PATIENT = gql`
+  query currentPatient($email: String!) {
+    currentPatient(email: $email) {
       _id
       username
       email

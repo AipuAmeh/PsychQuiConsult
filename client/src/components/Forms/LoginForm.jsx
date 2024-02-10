@@ -34,14 +34,12 @@ const LoginForm = () => {
     });
   };
 
-  const handlePatientLogin = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     const login =
       e.nativeEvent.submitter.id == "provider-login"
         ? loginProvider
         : loginPatient;
-
-        // console.log('WHO', login);
     try {
       const mutationResponse = await login({
         variables: {
@@ -50,6 +48,7 @@ const LoginForm = () => {
         },
       });
      console.log('RESPONSE', mutationResponse);
+
       // if (e.nativeEvent.submitter.id == "provider-login") {
       //   try {
       //     const { providerData } = await loginProvider({
@@ -108,7 +107,7 @@ const LoginForm = () => {
         </p>
       ) : (
         <form
-          onSubmit={handlePatientLogin}
+          onSubmit={handleLogin}
           className="bg-white shadow-md rounded px-8 pt-10 pb-8 mb-4 flex flex-col place-content-center mt-8 rounded"
           style={styles.loginForm}
         >
