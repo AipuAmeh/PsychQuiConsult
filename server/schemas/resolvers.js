@@ -3,12 +3,12 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    currentProvider: async (parent, { email }) => {
-      return Provider.findOne({ email }).populate("patients");
-    },
-    currentPatient: async (parent, { email }) => {
-      return Patient.findOne({ email: email }).populate("chartNotes");
-    },
+    // currentProvider: async (parent, { email }) => {
+    //   return Provider.findOne({ email }).populate("patients");
+    // },
+    // currentPatient: async (parent, { patientId }) => {
+    //   return Patient.findOne({ _id: patientId });
+    // },
     getAllPatients: async () => {
       return Patient.find().populate("chartNotes");
     },
@@ -30,40 +30,29 @@ const resolvers = {
       const token = signToken(patient);
       return { token, patient };
     },
-    loginProvider: async (parent, { email, password }) => {
-      const provider = await Provider.findOne({ email });
-
-      if (!provider) {
-        throw AuthenticationError;
-      }
-
-      const correctPw = await provider.isCorrectPassword(password);
-
-      if (!correctPw) {
-        throw AuthenticationError;
-      }
-
-      const token = signToken(provider);
-
-      // console.log({ token, provider });
-      return { token, provider };
-    },
     loginPatient: async (parent, { email, password }) => {
-      const patient = await Patient.findOne({ email });
-      console.log('THIS IS MY PATIENT', patient);
-      if (!patient) {
-        throw AuthenticationError;
+      try {
+        const patient = await Patient.findOne({ email });
+        console.log("-------------------------------------------");
+        console.log("THIS IS MY PATIENTS EMAIL:", patient.email);
+        if (!patient) {
+          throw AuthenticationError;
+        }
+  
+        const correctPw = await patient.isCorrectPassword(password);
+  
+        if (!correctPw) {
+          throw AuthenticationError;
+        }
+  
+        console.log("IS MY PASSWORD CORRECT??", correctPw);
+  
+        const token = signToken(patient);
+        return { token, patient };
+      } catch (error) {
+        throw new Error('Authentication failed')
       }
-
-      const correctPw = await patient.isCorrectPassword(password);
-
-      if (!correctPw) {
-        throw AuthenticationError;
-      }
-
-      const token = signToken(patient);
-      console.log({ token, patient });
-      return { token, patient };
+ 
     },
     addChartNote: async (parent, { patient, noteText }) => {
       const chartNote = await ChartNote.create({ patient, noteText });

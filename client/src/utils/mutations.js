@@ -30,32 +30,7 @@ export const ADD_PATIENT = gql`
   }
 `;
 
-export const LOGIN_PROVIDER = gql`
-  mutation loginProvider($email: String!, $password: String!) {
-    loginProvider(email: $email, password: $password) {
-      currentProvider {
-        _id
-        username
-        email
-      }
-      token
-    }
-  }
-`;
 
-export const LOGIN_PATIENT = gql`
-  mutation loginPatient($email: String!, $password: String!) {
-    loginPatient(email: $email, password: $password) {
-      currentPatient {
-        _id
-        username
-        email
-        chartNotes
-      }
-      token
-    }
-  }
-`;
 
 export const ADD_CHARTNOTE = gql`
   mutation addChartNote($patient: String!, $noteText: String!) {

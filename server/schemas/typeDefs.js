@@ -28,12 +28,10 @@ currentProvider: Provider
 
 type patientAuth {
 token: ID!
-currentPatient: Patient
+getSinglePatient: Patient
 }
 
 type Query {
-currentProvider(email: String!): Provider
-currentPatient(email: String!): Patient
 getAllPatients: [Patient]
 getSinglePatient(patientId: ID!): Patient
 getChartNote(noteId: ID!): ChartNote
@@ -42,7 +40,6 @@ getChartNote(noteId: ID!): ChartNote
 type Mutation {
 addProvider(username: String!, email: String!, password: String!): providerAuth
 addPatient(username: String!, email: String!, password: String!): patientAuth
-loginProvider(email: String!, password: String!): providerAuth
 loginPatient(email: String!, password: String!): patientAuth
 addChartNote(patient: String!, noteText: String!): ChartNote 
 removePatient(patientId: ID!): Patient

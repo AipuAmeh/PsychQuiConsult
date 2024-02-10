@@ -13,19 +13,18 @@ export const QUERY_PROVIDER = gql`
 `;
 
 export const QUERY_CURRENT_PATIENT = gql`
-  query currentPatient($email: String!) {
-    currentPatient(email: $email) {
+  query currentPatient($patientId: ID!) {
+    currentPatient(patientId: $patientId) {
       _id
       username
       email
-      chartNotes
     }
   }
 `;
 
 export const QUERY_ALL_PATIENTS = gql`
   query getAllPatients {
-    patient {
+    patients {
       _id
       username
       email
