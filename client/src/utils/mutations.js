@@ -1,17 +1,40 @@
 import { gql } from "@apollo/client";
 
-export const ADD_PROVIDER = gql`
-  mutation addProvider(
-    $username: String!
-    $email: String!
-    $password: String!
-  ) {
-    addProvider(username: $username, email: $email, password: $password) {
+// export const ADD_PROVIDER = gql`
+//   mutation addProvider(
+//     $username: String!
+//     $email: String!
+//     $password: String!
+//   ) {
+//     addProvider(username: $username, email: $email, password: $password) {
+//       token
+//       currentProvider {
+//         _id
+//         username
+//         email
+//       }
+//     }
+//   }
+// `;
+export const ADD_PROFILE = gql`
+  mutation addProfile($name: String!, $email: String!, $password: String!) {
+    addProfile(name: $name, email: $email, password: $password) {
       token
-      currentProvider {
+      profile {
         _id
-        username
-        email
+        name
+      }
+    }
+  }
+`;
+
+export const LOGIN_USER = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      profile {
+        _id
+        name
       }
     }
   }
@@ -29,8 +52,6 @@ export const ADD_PATIENT = gql`
     }
   }
 `;
-
-
 
 export const ADD_CHARTNOTE = gql`
   mutation addChartNote($patient: String!, $noteText: String!) {

@@ -1,49 +1,67 @@
 const typeDefs = `#graphql
-type Provider {
-_id: ID
-username: String
-email: String
-password: String
-patients: [Patient]!
-}
+  type Profile {
+    _id: ID
+    name: String
+    email: String
+    password: String
+    skills: [String]!
+  }
 
-type Patient {
-_id: ID
-username: String
-email: String
-password: String
-chartNotes: [ChartNote]!
-}
+  type Auth {
+    token: ID!
+    profile: Profile
+  }
 
-type ChartNote {
-_id: ID
-noteText: String
-dateCreated: String
-}
+  type Provider {
+    _id: ID
+    username: String
+    email: String
+    password: String
+    patients: [Patient]!
+  }
 
-type providerAuth {
-token: ID!
-currentProvider: Provider
-}
+  type Patient {
+    _id: ID
+    username: String
+    email: String
+    password: String
+    chartNotes: [ChartNote]!
+  }
 
-type patientAuth {
-token: ID!
-getSinglePatient: Patient
-}
+  type ChartNote {
+    _id: ID
+    noteText: String
+    dateCreated: String
+  }
 
-type Query {
-getAllPatients: [Patient]
-getSinglePatient(patientId: ID!): Patient
-getChartNote(noteId: ID!): ChartNote
+  type providerAuth {
+    token: ID!
+    currentProvider: Provider
+  }
+
+  type patientAuth {
+    token: ID!
+    patient: Patient
+  }
+
+  type Query {
+    #profiles: [Profile]!
+    #profile(profileId: ID!): Profile
+    getAllPatients: [Patient]!
+    getSinglePatient(patientId: ID!): Patient
+    getChartNote(noteId: ID!): ChartNote
+    patient(patientId: ID!): Patient
 }
 
 type Mutation {
-addProvider(username: String!, email: String!, password: String!): providerAuth
-addPatient(username: String!, email: String!, password: String!): patientAuth
-loginPatient(email: String!, password: String!): patientAuth
-addChartNote(patient: String!, noteText: String!): ChartNote 
-removePatient(patientId: ID!): Patient
-removeChartNote(noteId: ID!): ChartNote 
+    #addProfile(name: String!, email: String!, password: String!): Auth
+    #login(email: String!, password: String!): Auth
+    #addProvider(username: String!, email: String!, password: String!): providerAuth
+    addPatient(username: String!, email: String!, password: String!): patientAuth
+    loginPatient(email: String!, password: String!): patientAuth
+    addChartNote(patient: String!, noteText: String!): ChartNote 
+    removePatient(patientId: ID!): Patient
+    removeChartNote(noteId: ID!): ChartNote 
 }
 `;
 
