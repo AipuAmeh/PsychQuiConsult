@@ -4,11 +4,11 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    // provider: async (parent, { email }) => {
-    //   return Provider.findOne({ email }).populate("patients");
-    // },
     patient: async (parent, { patientId }) => {   
       return Patient.findOne({ _id: patientId });
+    },
+    provider: async (parent, { providerId }) => {
+      return Provider.findOne({ _id: providerId });
     },
     // profiles: async () => {
     //   return Profile.find();
@@ -51,11 +51,11 @@ const resolvers = {
     //   console.log(profile);
     //   return { token, profile };
     // },
-    // addProvider: async (parent, { username, email, password }) => {
-    //   const provider = await Provider.create({ username, email, password });
-    //   const token = signToken(provider);
-    //   return { token, provider };
-    // },
+    addProvider: async (parent, { username, email, password }) => {
+      const provider = await Provider.create({ username, email, password });
+      const token = signToken(provider);
+      return { token, provider };
+    },
     addPatient: async (parent, { username, email, password }) => {
       const patient = await Patient.create({ username, email, password });
       const token = signToken(patient);
@@ -77,6 +77,26 @@ const resolvers = {
         const token = signToken(patient);
         console.log("PATIENT:", patient);
         return { token, patient };
+      } catch (error) {
+        throw new Error("Authentication failed");
+      }
+    },
+    loginProvider: async (parent, { email, password }) => {
+      try {
+        const provider = await Provider.findOne({ email });
+        if (!provider) {
+          throw AuthenticationError;
+        }
+
+        const correctPw = await provider.isCorrectPassword(password);
+
+        if (!correctPw) {
+          throw AuthenticationError;
+        }
+
+        const token = signToken(provider);
+        console.log("PROVIDER:", provider);
+        return { token, provider };
       } catch (error) {
         throw new Error("Authentication failed");
       }

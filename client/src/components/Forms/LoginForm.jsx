@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useMutation } from "@apollo/client";
-import { LOGIN_PATIENT, LOGIN_PROVIDER } from "../../utils/mutations";
+import { LOGIN_PATIENT } from "../../utils/mutations";
 
 import Auth from "../../utils/auth";
 

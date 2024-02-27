@@ -1,26 +1,26 @@
 import { gql } from "@apollo/client";
 
-// export const QUERY_PROVIDER = gql`
-//   query currentProvider($email: String!) {
-//     currentProvider(email: $email) {
-//       _id
-//       username
-//       email
-//       patients
-//       chartNotes
-//     }
-//   }
-// `;
+export const QUERY_PROVIDER = gql`
+  query currentProvider($providerId: ID!) {
+   provider(providerId: $providerId) {
+      _id
+      username
+      email
+      patients
+      chartNotes
+    }
+  }
+`;
 
-// export const QUERY_CURRENT_PATIENT = gql`
-//   query currentPatient($patientId: ID!) {
-//     currentPatient(patientId: $patientId) {
-//       _id
-//       username
-//       email
-//     }
-//   }
-// `;
+export const QUERY_CURRENT_PATIENT = gql`
+  query currentPatient($patientId: ID!) {
+    patient(patientId: $patientId) {
+      _id
+      username
+      email
+    }
+  }
+`;
 export const QUERY_PROFILES = gql`
   query allProfiles {
     profiles {
