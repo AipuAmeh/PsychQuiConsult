@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useMutation } from "@apollo/client";
-import { ADD_PATIENT, ADD_PROVIDER } from "../../utils/mutations";
+import { ADD_PATIENT } from "../../utils/mutations";
 
 import Auth from "../../utils/auth";
 
@@ -23,8 +23,6 @@ const SignupForm = () => {
   });
 
   const [addPatient, { error, data }] = useMutation(ADD_PATIENT);
-  // const [addProvider, { error: providerError, data: providerData }] = useMutation(ADD_PROVIDER);
-  // console.log(error);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormState({
@@ -33,36 +31,20 @@ const SignupForm = () => {
     });
   };
 
-  // add signup as provider function
   const handleFormSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const signup = e.nativeEvent.submitter.id == "patient-signup" ? addPatient : addProvider;
+    e.preventDefault();
 
-    // try {
-    //   const mutationResponse = await signup({
-    //     variables: {
-
-    //     }
-    //   })
-    // } catch (error) {
-      
-    // }
-   
-  
-    // console.log(formState);
-    // if (e.target.value === "patient-signup") {
-    //   console.log("I am a patient");
-    //   // try {
-    //   //   const { data } = await addPatient({
-    //   //     variables: { ...formState },
-    //   //   });
-    //   //   Auth.login(data.addPatient.token);
-    //   //   console.log(data);
-    //   //   setFormState(" ");
-    //   // } catch (error) {
-    //   //   console.error(error);
-    //   // }
-   
+    console.log(formState);
+    try {
+      const { data } = await addPatient({
+        variables: { ...formState },
+      });
+      console.log("PATIENT DATA:", data);
+      Auth.login(data.addPatient.token);
+      console.log(Auth.getProfile().data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -130,26 +112,16 @@ const SignupForm = () => {
           <div className="flex items-center justify-between flex-col space-y-4">
             <button
               className=" mx-auto text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-serif"
-              id='patient-signup'
+              id="patient-signup"
               type="submit"
               style={styles.button}
             >
               Create Patient Account
             </button>
-            <button
-              className=" mx-auto text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-serif"
-              id='provider-signup'
-              type="submit"
-              style={styles.button}
-            >
-              Create Provider Account
-            </button>
           </div>
         </form>
       )}
-      {error && (
-        <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
-      )}
+      {error ? <div className="my-3 p-3 bg-danger text-white"></div> : null}
     </div>
   );
 };

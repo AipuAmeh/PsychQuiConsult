@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useMutation } from "@apollo/client";
-import { LOGIN_PATIENT } from "../../utils/mutations";
+import { LOGIN_PATIENT, LOGIN_PROVIDER } from "../../utils/mutations";
 
 import Auth from "../../utils/auth";
 
@@ -22,8 +22,10 @@ const LoginForm = () => {
     password: "",
   });
 
-  const [loginPatient, { error: patientError , data: patientData }] = useMutation(LOGIN_PATIENT);
-  const [loginProvider, { error: providerError, data: providerData }] = useMutation(LOGIN_PROVIDER);
+  const [loginPatient, { error: patientError, data: patientData }] =
+    useMutation(LOGIN_PATIENT);
+  const [loginProvider, { error: providerError, data: providerData }] =
+    useMutation(LOGIN_PROVIDER);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,66 +38,35 @@ const LoginForm = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const login =
-      e.nativeEvent.submitter.id == "provider-login"
-        ? loginProvider
-        : loginPatient;
-    try {
-      const mutationResponse = await login({
-        variables: {
-          email: formState.email,
-          password: formState.password,
-        },
-      });
-     console.log('RESPONSE', mutationResponse);
-
-      // if (e.nativeEvent.submitter.id == "provider-login") {
-      //   try {
-      //     const { providerData } = await loginProvider({
-      //       variables: { ...mutationResponse },
-      //     });
-      //     Auth.login(providerData.loginProvider.token);
-      //     setFormState({
-      //       email: "",
-      //       password: ""
-      //     })
-      //     navigate('/');
-      //   } catch (error) {
-      //     console.error(error)
-      //   }
-       
-      // } else {
-      //   console.log('UNABLE TO LOG PROVIDER');
-      // }
-    // else {
-    //     Auth.login(mutationResponse.loginPatient.token);
-    //     setFormState(mutationResponse);
-    //   }
-      
-    //   // let mutationObj =
-    //   //   mutationResponse.data[Object.keys(mutationResponse.data)[0]];
-
-    //   // const { token } = mutationObj;
-    //   // const user =
-    //   //   mutationObj[
-    //   //     Object.keys(mutationObj)[Object.keys(mutationObj).findIndex((el) => el.includes("current"))]
-    //   //   ];
-    // } catch (error) {
-    //   console.error(error)
-    // }
-    // e.preventDefault();
-    // console.log(formState);
-    // try {
-    //   const { data } = await loginPatient({
-    //     variables: { ...formState },
-    //   });
-    //   Auth.login(data.loginPatient.token);
-    //   setFormState({
-    //     email: "",
-    //     password: "",
-    //   });
-    } catch (error) {
-      console.error(error);
+// try {
+  
+// } catch (error) {
+//   console.error(error);
+// }
+// add validation for double password
+// wrap entire if statement in try catch block ?
+    if (e.nativeEvent.submitter.id == "provider-login") {
+      try {
+        const { data: providerData } = await loginProvider({
+          variables: { ...formState },
+        });
+        Auth.login(providerData.loginProvider.token);
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (e.nativeEvent.submitter.id == "patient-login") {
+      try {
+        const { data: patientData } = await loginPatient(
+          {
+          variables: { ...formState },
+        });
+        console.log('PATIENT DATA:', patientData);
+        Auth.login(patientData.loginPatient.token);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      console.log("Unable to log in");
     }
   };
 
@@ -103,7 +74,7 @@ const LoginForm = () => {
     <div className="w-full max-w-lg mx-auto">
       {patientData || providerData ? (
         <p>
-          Success! <Link to='/'> back to homepage. </Link>
+          Success! <Link to="/"> back to homepage. </Link>
         </p>
       ) : (
         <form
