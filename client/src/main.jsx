@@ -12,6 +12,7 @@ import Login from "./pages/Login.jsx";
 // import Payment from "./pages/Payment.jsx";
 import Signup from "./pages/Signup.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
+import PatientDashboard from "./pages/PatientDashboard.jsx";
 
 const router = createBrowserRouter([
   {
@@ -43,10 +44,10 @@ const router = createBrowserRouter([
         path: "/admin",
         element: <ProviderDashboard />,
       },
-      // {
-      //   path: "/dashboard/:providerId",
-      //   element: <Dashboard />,
-      // },
+      {
+        path: "/patient-dashboard/",
+        element: <PatientDashboard />,
+      },
       // {
       //   path: "/dashboard/:patientId",
       //   element: <Dashboard />,

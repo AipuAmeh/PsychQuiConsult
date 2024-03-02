@@ -51,6 +51,7 @@ const LoginForm = () => {
           variables: { ...formState },
         });
         Auth.login(providerData.loginProvider.token);
+        navigate('/');
       } catch (error) {
         console.error(error);
       }
@@ -62,6 +63,7 @@ const LoginForm = () => {
         });
         console.log('PATIENT DATA:', patientData);
         Auth.login(patientData.loginPatient.token);
+        navigate('/');
       } catch (error) {
         console.error(error);
       }
@@ -74,7 +76,7 @@ const LoginForm = () => {
     <div className="w-full max-w-lg mx-auto">
       {patientData || providerData ? (
         <p>
-          Success! <Link to="/"> back to homepage. </Link>
+          <Link to="/"> </Link>
         </p>
       ) : (
         <form

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useMutation } from "@apollo/client";
 import { ADD_PATIENT } from "../../utils/mutations";
@@ -16,6 +16,7 @@ const styles = {
 };
 
 const SignupForm = () => {
+  const navigate = useNavigate();
   const [formState, setFormState] = useState({
     username: "",
     email: "",
@@ -42,6 +43,7 @@ const SignupForm = () => {
       console.log("PATIENT DATA:", data);
       Auth.login(data.addPatient.token);
       console.log(Auth.getProfile().data);
+      navigate('/');
     } catch (error) {
       console.error(error);
     }
@@ -51,8 +53,7 @@ const SignupForm = () => {
     <div className="w-full max-w-lg mx-auto signup-form">
       {data ? (
         <p>
-          Successfully created account!{" "}
-          <Link to="/">back to the homepage.</Link>
+          <Link to="/"></Link>
         </p>
       ) : (
         <form

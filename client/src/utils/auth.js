@@ -1,5 +1,7 @@
 import { jwtDecode } from 'jwt-decode';
+import { createContext } from 'react';
 
+export const CurrentUserContext = createContext();
 // methods associated with the class titled AuthService 
 class AuthService {
     getProfile() {
@@ -35,6 +37,14 @@ class AuthService {
     logout() {
         localStorage.removeItem('id_token');
         window.location.reload();
+    }
+
+    isProvider() {
+
+    }
+
+    isPatient(){
+        
     }
 }
 

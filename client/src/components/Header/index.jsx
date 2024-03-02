@@ -4,9 +4,9 @@ import { useQuery } from "@apollo/client";
 import { QUERY_CURRENT_PATIENT } from "../../utils/queries";
 
 const styles = {
-  accentColor: {
-    backgroundColor: "#C49A6C",
-  },
+  // accentColor: {
+  //   backgroundColor: "#C49A6C",
+  // },
   welcomeMessage: {
     display: "inline",
     position: "absolute",
@@ -29,7 +29,7 @@ const Header = () => {
     <header style={styles.accentColor} className="py-0 flex-row align-center">
       <img
         src="images/logo.png"
-        className="logo flex place-items-center justify-start mt-0 pt-2"
+        className="logo flex place-items-center justify-start mt-0 pt-4"
         alt="psychquiconsult-logo"
       ></img>
       <div className="container flex flex-row justify-end ml-12">
@@ -43,15 +43,10 @@ const Header = () => {
         </nav>
         {Auth.loggedIn() ? (
           <>
-            {/* <span
-              className="welcome-message flex"
-              style={styles.welcomeMessage}
-            >
-              Hey there, {Auth.getProfile().data._id}!
-            </span> */}
             <button className="btn btn-lg btn-light m-2 mb-5" onClick={logout}>
               Logout
             </button>
+            <Link  className="btn btn-lg btn-light m-2 mb-5" to='/patient-dashboard'> Dashboard</Link>
           </>
         ) : (
           <nav className=" pb-3 flex items-center">
