@@ -1,10 +1,9 @@
 import { jwtDecode } from 'jwt-decode';
-import { createContext } from 'react';
 
-export const CurrentUserContext = createContext();
 // methods associated with the class titled AuthService 
 class AuthService {
     getProfile() {
+        // const currentUser = 
         return jwtDecode(this.getToken());
     }
 
@@ -12,6 +11,7 @@ class AuthService {
         const token = this.getToken();
 
         return token && !this.isTokenExpired(token) ? true : false;
+
     }
 
     isTokenExpired(token) {
@@ -36,16 +36,10 @@ class AuthService {
 
     logout() {
         localStorage.removeItem('id_token');
-        window.location.reload();
+        // window.location.reload();
+        window.location.assign('/');
     }
 
-    isProvider() {
-
-    }
-
-    isPatient(){
-        
-    }
 }
 
 export default new AuthService();
