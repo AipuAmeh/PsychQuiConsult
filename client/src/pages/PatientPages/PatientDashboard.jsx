@@ -1,4 +1,4 @@
-import Auth from "../utils/auth";
+import Auth from "../../utils/auth";
 
 const PatientDashboard = () => {
   return (

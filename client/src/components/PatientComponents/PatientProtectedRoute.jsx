@@ -9,7 +9,7 @@ const ProviderProtectedRoute = () => {
     const { isProvider } = useCurrentUserContext();
     // if not logged in or is a patient, 
     // navigate to login page
-  if (!Auth.loggedIn() || !isProvider) {
+  if (!Auth.loggedIn() || isProvider) {
     return <Navigate to="/login" />;
   }
 };

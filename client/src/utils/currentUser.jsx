@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useMemo } from "react";
-import Auth from "../utils/auth";
+import Auth from "./auth";
 export const CurrentUserContext = createContext();
 
 export const useCurrentUserContext = () => useContext(CurrentUserContext);

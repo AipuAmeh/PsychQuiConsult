@@ -46,7 +46,7 @@ const Header = () => {
             <button className="btn btn-lg btn-light m-2 mb-5" onClick={logout}>
               Logout
             </button>
-            <Link  className="btn btn-lg btn-light m-2 mb-5" to='/patient-dashboard'> Dashboard</Link>
+            <Link  className="btn btn-lg btn-light m-2 mb-5" to='/dashboard'> Dashboard</Link>
           </>
         ) : (
           <nav className=" pb-3 flex items-center">
