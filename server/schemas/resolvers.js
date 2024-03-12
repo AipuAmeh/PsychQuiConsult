@@ -1,19 +1,20 @@
 const { Patient, ChartNote, Provider } = require("../models");
+
 const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    currentProvider: async (parent, { email }) => {
-      return Provider.findOne({ email }).populate("patients");
+    patient: async (parent, { patientId }) => {   
+      return Patient.findOne({ _id: patientId });
     },
-    currentPatient: async (parent, { email }) => {
-      return Patient.findOne(parent, { email }).populate("chartNotes");
+    provider: async (parent, { providerId }) => {
+      return Provider.findOne({ _id: providerId });
     },
     getAllPatients: async () => {
       return Patient.find().populate("chartNotes");
     },
     getSinglePatient: async (parent, { patientId }) => {
-      return Patient.findOne({ _id: patientId }).populate("chartNotes");
+      return Patient.findOne({ _id: patientId });
     },
     getChartNote: async (parent, { noteId }) => {
       return ChartNote.findOne({ _id: noteId });
@@ -30,40 +31,45 @@ const resolvers = {
       const token = signToken(patient);
       return { token, patient };
     },
-    loginProvider: async (parent, { email, password }) => {
-      const provider = await Provider.findOne({ email });
-
-      if (!provider) {
-        throw AuthenticationError;
-      }
-
-      const correctPw = provider.isCorrectPassword(password);
-
-      if (!correctPw) {
-        throw AuthenticationError;
-      }
-
-      const token = signToken(provider);
-
-      console.log({ token, provider });
-      return { token, provider };
-    },
     loginPatient: async (parent, { email, password }) => {
-      const patient = await Patient.findOne({ email });
+      try {
+        const patient = await Patient.findOne({ email });
+        if (!patient) {
+          throw AuthenticationError;
+        }
 
-      if (!patient) {
-        throw AuthenticationError;
+        const correctPw = await patient.isCorrectPassword(password);
+
+        if (!correctPw) {
+          throw AuthenticationError;
+        }
+
+        const token = signToken(patient);
+        console.log("PATIENT:", patient);
+        return { token, patient };
+      } catch (error) {
+        throw new Error("Authentication failed");
       }
+    },
+    loginProvider: async (parent, { email, password }) => {
+      try {
+        const provider = await Provider.findOne({ email });
+        if (!provider) {
+          throw AuthenticationError;
+        }
 
-      const correctPw = patient.isCorrectPassword(password);
+        const correctPw = await provider.isCorrectPassword(password);
 
-      if (!correctPw) {
-        throw AuthenticationError;
+        if (!correctPw) {
+          throw AuthenticationError;
+        }
+
+        const token = signToken(provider);
+        console.log("PROVIDER:", provider);
+        return { token, provider };
+      } catch (error) {
+        throw new Error("Authentication failed");
       }
-
-      const token = signToken(patient);
-      console.log({ token, patient });
-      return { token, patient };
     },
     addChartNote: async (parent, { patient, noteText }) => {
       const chartNote = await ChartNote.create({ patient, noteText });

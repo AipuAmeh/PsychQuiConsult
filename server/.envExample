@@ -1,0 +1,7 @@
+// your secret
+JWT_KEY =''
+
+// time
+EXPIRATION_KEY =''
+
+STATIC_DIR ='../client'

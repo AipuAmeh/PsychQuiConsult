@@ -3,6 +3,7 @@ import { jwtDecode } from 'jwt-decode';
 // methods associated with the class titled AuthService 
 class AuthService {
     getProfile() {
+        // const currentUser = 
         return jwtDecode(this.getToken());
     }
 
@@ -10,6 +11,7 @@ class AuthService {
         const token = this.getToken();
 
         return token && !this.isTokenExpired(token) ? true : false;
+
     }
 
     isTokenExpired(token) {
@@ -34,8 +36,10 @@ class AuthService {
 
     logout() {
         localStorage.removeItem('id_token');
-        window.location.reload();
+        // window.location.reload();
+        window.location.assign('/');
     }
+
 }
 
 export default new AuthService();

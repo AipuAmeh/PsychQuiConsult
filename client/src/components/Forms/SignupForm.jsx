@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useMutation } from "@apollo/client";
-import { ADD_PROVIDER } from "../../utils/mutations";
+import { ADD_PATIENT } from "../../utils/mutations";
 
 import Auth from "../../utils/auth";
 
@@ -16,13 +16,14 @@ const styles = {
 };
 
 const SignupForm = () => {
+  const navigate = useNavigate();
   const [formState, setFormState] = useState({
     username: "",
     email: "",
     password: "",
   });
-  const [addProvider, { error, data }] = useMutation(ADD_PROVIDER);
-  // console.log(error);
+
+  const [addPatient, { error, data }] = useMutation(ADD_PATIENT);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormState({
@@ -33,14 +34,16 @@ const SignupForm = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
     console.log(formState);
     try {
-      const { data } = await addProvider({
+      const { data } = await addPatient({
         variables: { ...formState },
       });
-      Auth.login(data.addProvider.token);
-      console.log(data);
-      setFormState(" ");
+      console.log("PATIENT DATA:", data);
+      Auth.login(data.addPatient.token);
+      console.log(Auth.getProfile().data);
+      navigate('/');
     } catch (error) {
       console.error(error);
     }
@@ -50,8 +53,7 @@ const SignupForm = () => {
     <div className="w-full max-w-lg mx-auto signup-form">
       {data ? (
         <p>
-          Successfully created account!{" "}
-          <Link to="/">back to the homepage.</Link>
+          <Link to="/"></Link>
         </p>
       ) : (
         <form
@@ -111,17 +113,16 @@ const SignupForm = () => {
           <div className="flex items-center justify-between flex-col space-y-4">
             <button
               className=" mx-auto text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-serif"
+              id="patient-signup"
               type="submit"
               style={styles.button}
             >
-              Sign up
+              Create Patient Account
             </button>
           </div>
         </form>
       )}
-      {error && (
-        <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
-      )}
+      {error ? <div className="my-3 p-3 bg-danger text-white"></div> : null}
     </div>
   );
 };

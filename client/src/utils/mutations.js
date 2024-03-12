@@ -8,33 +8,10 @@ export const ADD_PROVIDER = gql`
   ) {
     addProvider(username: $username, email: $email, password: $password) {
       token
-      currentProvider {
+      provider {
         _id
         username
-      }
-    }
-  }
-`;
-
-export const ADD_PATIENT = gql`
-  mutation addPatient($username: String!, $email: String!, $password: String!) {
-    addPatient(username: $username, email: $email, password: $password) {
-      token
-      currentPatient {
-        _id
-        username
-      }
-    }
-  }
-`;
-
-export const LOGIN_PROVIDER = gql`
-  mutation loginProvider($email: String!, $password: String!) {
-    loginProvider(email: $email, password: $password) {
-      token
-      currentProvider {
-        _id
-        username
+        email
       }
     }
   }
@@ -44,9 +21,38 @@ export const LOGIN_PATIENT = gql`
   mutation loginPatient($email: String!, $password: String!) {
     loginPatient(email: $email, password: $password) {
       token
-      currentPatient {
+      patient {
         _id
         username
+        email
+        password
+      }
+    }
+  }
+`;
+
+export const LOGIN_PROVIDER = gql`
+  mutation loginProvider($email: String!, $password: String!) {
+    loginProvider(email: $email, password: $password) {
+      token
+      provider {
+      _id
+      username
+      email
+      password
+      }
+    }
+  }
+`;
+
+export const ADD_PATIENT = gql`
+  mutation addPatient($username: String!, $email: String!, $password: String!) {
+    addPatient(username: $username, email: $email, password: $password) {
+      token
+      patient {
+        _id
+        username
+        email
       }
     }
   }
