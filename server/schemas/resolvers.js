@@ -1,6 +1,6 @@
 const { Patient, ChartNote, Provider } = require("../models");
 
-const { signToken, AuthenticationError } = require("../utils/auth");
+const { signProviderToken, signPatientToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
@@ -21,14 +21,14 @@ const resolvers = {
     },
   },
   Mutation: {
-    addProvider: async (parent, { username, email, password }) => {
-      const provider = await Provider.create({ username, email, password });
-      const token = signToken(provider);
+    addProvider: async (parent, { providerName, email, password }) => {
+      const provider = await Provider.create({ providerName, email, password });
+      const token = signProviderToken(provider);
       return { token, provider };
     },
     addPatient: async (parent, { username, email, password }) => {
       const patient = await Patient.create({ username, email, password });
-      const token = signToken(patient);
+      const token = signPatientToken(patient);
       return { token, patient };
     },
     loginPatient: async (parent, { email, password }) => {
@@ -44,7 +44,7 @@ const resolvers = {
           throw AuthenticationError;
         }
 
-        const token = signToken(patient);
+        const token = signPatientToken(patient);
         console.log("PATIENT:", patient);
         return { token, patient };
       } catch (error) {
@@ -64,7 +64,7 @@ const resolvers = {
           throw AuthenticationError;
         }
 
-        const token = signToken(provider);
+        const token = signProviderToken(provider);
         console.log("PROVIDER:", provider);
         return { token, provider };
       } catch (error) {
