@@ -2,7 +2,7 @@ const typeDefs = `#graphql
 
   type Provider {
     _id: ID
-    username: String
+    providerName: String
     email: String
     password: String
     patients: [Patient]!
@@ -41,7 +41,7 @@ const typeDefs = `#graphql
 }
 
 type Mutation {
-    addProvider(username: String!, email: String!, password: String!): providerAuth
+    addProvider(providerName: String!, email: String!, password: String!): providerAuth
     addPatient(username: String!, email: String!, password: String!): patientAuth
     loginPatient(email: String!, password: String!): patientAuth
     loginProvider(email: String!, password: String!): providerAuth

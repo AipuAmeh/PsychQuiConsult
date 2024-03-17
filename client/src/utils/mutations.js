@@ -10,7 +10,7 @@ export const ADD_PROVIDER = gql`
       token
       provider {
         _id
-        username
+        providerName
         email
       }
     }
@@ -37,7 +37,7 @@ export const LOGIN_PROVIDER = gql`
       token
       provider {
       _id
-      username
+      providerName
       email
       password
       }
