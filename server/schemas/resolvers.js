@@ -31,6 +31,9 @@ const resolvers = {
       const token = signPatientToken(patient);
       return { token, patient };
     },
+    // addPatientDetails: async (parent, { firstname, lastname, dob, email, phone }) => {
+
+    // },
     loginPatient: async (parent, { email, password }) => {
       try {
         const patient = await Patient.findOne({ email });
