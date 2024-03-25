@@ -18,6 +18,9 @@ const styles = {
 const SignupForm = () => {
   const navigate = useNavigate();
   const [formState, setFormState] = useState({
+    firstname: "",
+    lastname: "",
+    dob: "",
     username: "",
     email: "",
     password: "",
@@ -43,7 +46,7 @@ const SignupForm = () => {
       console.log("PATIENT DATA:", data);
       Auth.login(data.addPatient.token);
       console.log(Auth.getProfile().data);
-      navigate('/');
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
@@ -61,22 +64,46 @@ const SignupForm = () => {
           className="bg-white shadow-md rounded px-8 pt-10 pb-8 mb-4 flex flex-col place-content-center mt-8"
           style={styles.signupForm}
         >
-          <div className="mb-4">
-            <label
-              className="block text-black-700 text-sm font-bold mb-2 font-serif"
-              htmlFor="username"
-            >
-              Username
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="signup-username"
-              name="username"
-              type="text"
-              placeholder="Username"
-              value={formState.username}
-              onChange={handleChange}
-            ></input>
+          <div className="mb-4 mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div className="sm:col-span-3">
+              <label
+                htmlFor="first-name"
+                className="block text-black-700 text-sm font-bold mb-2 font-serif"
+              >
+                First name
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="first-name"
+                  id="first-name"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6 pl-2"
+                  placeholder="First Name"
+                  value={formState.firstname}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div className="sm:col-span-3">
+              <label
+                htmlFor="last-name"
+                className="block text-black-700 text-sm font-bold mb-2 font-serif"
+              >
+                Last name
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="last-name"
+                  id="last-name"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6 pl-2"
+                  placeholder="Last Name"
+                  value={formState.lastname}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
           </div>
           <div className="mb-6">
             <label
@@ -86,7 +113,7 @@ const SignupForm = () => {
               Email
             </label>
             <input
-              className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6 pl-2"
               id="signup-email"
               name="email"
               type="email"
@@ -95,13 +122,28 @@ const SignupForm = () => {
               onChange={handleChange}
             ></input>
             <label
-              className="block text-black-900 text-sm font-bold mb-2 font-serif"
+              className="block text-black-700 text-sm font-bold mb-2 mt-2 font-serif sm:col-span-2"
+              htmlFor="dob"
+            >
+              Date of Birth
+            </label>
+            <input
+              className="block w-100% rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6 pl-2 sm:col-span-2"
+              id="signup-dob"
+              name="dob"
+              type="text"
+              placeholder="MM/DD/YYYY"
+              value={formState.dob}
+              onChange={handleChange}
+            ></input>
+            <label
+              className="block text-black-900 text-sm font-bold mb-2 mt-2 font-serif"
               htmlFor="password"
             >
               Password
             </label>
             <input
-              className="shadow appearance-none rounded w-full py-2 px-3 text-black-900 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6 pl-2"
               id="signup-password"
               name="password"
               type="password"

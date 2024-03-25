@@ -26,14 +26,11 @@ const resolvers = {
       const token = signProviderToken(provider);
       return { token, provider };
     },
-    addPatient: async (parent, { username, email, password }) => {
-      const patient = await Patient.create({ username, email, password });
+    addPatient: async (parent, { firstname, lastname,dob, username, email, password }) => {
+      const patient = await Patient.create({ firstname, lastname, dob, username, email, password });
       const token = signPatientToken(patient);
       return { token, patient };
     },
-    // addPatientDetails: async (parent, { firstname, lastname, dob, email, phone }) => {
-
-    // },
     loginPatient: async (parent, { email, password }) => {
       try {
         const patient = await Patient.findOne({ email });

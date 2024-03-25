@@ -18,6 +18,7 @@ import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import ViewPatients from "./pages/ProviderPages/ViewPatients.jsx";
 // import PatientDashboard from "./pages/PatientDashboard.jsx";
 // import ProviderProtectedRoute from "./components/ProviderComponents/ProviderProtectedRoute.jsx";
 
@@ -36,7 +37,10 @@ const router = createBrowserRouter(
       element={
               <Dashboard /> 
       } />
- 
+      <Route
+      path="/view-patients"
+      element={<ViewPatients />}
+      ></Route>
     </Route>
   )
   // {

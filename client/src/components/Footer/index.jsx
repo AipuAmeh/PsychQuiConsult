@@ -14,7 +14,7 @@ const styles = {
 const Footer = () => {
   return (
     <footer
-      className="flex items-end justify-items-center py-4 "
+      className="flex items-end justify-items-center py-4"
       style={styles.footer}
     >
       <div>
