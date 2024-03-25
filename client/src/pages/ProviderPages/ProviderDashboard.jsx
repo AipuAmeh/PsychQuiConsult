@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 
 const styles = {
   buttons: {
@@ -13,8 +13,9 @@ const ProviderDashboard = () => {
         className=" mx-auto text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-serif"
         id="patient-login"
         style={styles.buttons}
-        type="submit"
+         type="submit"
       >
+        <Link to='/view-patients'></Link>
         View All Patients
       </button>
       <button
