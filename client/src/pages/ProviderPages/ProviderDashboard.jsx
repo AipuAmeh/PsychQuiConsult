@@ -7,16 +7,16 @@ const styles = {
 };
 const ProviderDashboard = () => {
   return (
-    <div className="flex flex-col m-5 space-y-8 ">
+    <div className="flex flex-col m-5 space-y-8 mb-80
+     ">
       <h2 className="mx-auto text-xl ">Provider Portal</h2>
       <button
         className=" mx-auto text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-serif"
         id="patient-login"
         style={styles.buttons}
-         type="submit"
+        type="submit"
       >
-        <Link to='/view-patients'></Link>
-        View All Patients
+        <Link to="/view-patients">View All Patients</Link>
       </button>
       <button
         className=" mx-auto text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-serif"
